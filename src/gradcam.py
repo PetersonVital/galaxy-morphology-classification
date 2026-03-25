@@ -44,13 +44,29 @@ def load_artifacts():
     return model, class_names
 
 
-def get_target_layer_name(model):
-    for layer in reversed(model.layers):
-        output_shape = getattr(layer, "output_shape", None)
-        if output_shape is not None and len(output_shape) == 4:
-            return layer.name
+def get_feature_extractor(model):
+    for layer in model.layers:
+        if isinstance(layer, tf.keras.Model) and "mobilenet" in layer.name.lower():
+            return layer
 
-    raise ValueError("Could not find a 4D convolutional feature layer for Grad-CAM.")
+    for layer in model.layers:
+        if isinstance(layer, tf.keras.Model):
+            return layer
+
+    raise ValueError("Could not find the feature extractor submodel.")
+
+
+def build_classifier_head(model, feature_extractor):
+    start_index = model.layers.index(feature_extractor) + 1
+
+    classifier_input = tf.keras.Input(shape=feature_extractor.output_shape[1:])
+    x = classifier_input
+
+    for layer in model.layers[start_index:]:
+        x = layer(x)
+
+    classifier_model = tf.keras.Model(classifier_input, x)
+    return classifier_model
 
 
 def collect_images():
@@ -84,26 +100,29 @@ def load_image_for_visualization(image_path):
 
 
 def make_gradcam_heatmap(model, processed_image, pred_index=None):
-    target_layer_name = get_target_layer_name(model)
-
-    grad_model = tf.keras.models.Model(
-        inputs=model.inputs,
-        outputs=[model.get_layer(target_layer_name).output, model.output],
-    )
+    feature_extractor = get_feature_extractor(model)
+    classifier_model = build_classifier_head(model, feature_extractor)
 
     with tf.GradientTape() as tape:
-        conv_outputs, predictions = grad_model(processed_image)
+        feature_maps = feature_extractor(processed_image, training=False)
+        tape.watch(feature_maps)
+
+        predictions = classifier_model(feature_maps, training=False)
+
         if pred_index is None:
             pred_index = tf.argmax(predictions[0])
+
         class_channel = predictions[:, pred_index]
 
-    grads = tape.gradient(class_channel, conv_outputs)
+    grads = tape.gradient(class_channel, feature_maps)
     pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
 
-    conv_outputs = conv_outputs[0]
-    heatmap = tf.reduce_sum(conv_outputs * pooled_grads, axis=-1)
+    feature_maps = feature_maps[0]
+    heatmap = tf.reduce_sum(feature_maps * pooled_grads, axis=-1)
 
-    heatmap = tf.maximum(heatmap, 0) / (tf.reduce_max(heatmap) + 1e-8)
+    heatmap = tf.maximum(heatmap, 0)
+    heatmap = heatmap / (tf.reduce_max(heatmap) + tf.keras.backend.epsilon())
+
     return heatmap.numpy(), int(pred_index), predictions.numpy()[0]
 
 
