@@ -1,7 +1,7 @@
 from pathlib import Path
 
-import matplotlib.pyplot as plt
 import pandas as pd
+from chart_style import create_figure, format_axis, annotate_bars, annotate_barh, save_figure
 
 
 REPORTS_DIR = Path("outputs/reports")
@@ -61,88 +61,72 @@ def load_data():
     )
 
 
-def style_axis(ax, title, xlabel="", ylabel="", ylim=None):
-    ax.set_title(title, loc="left", pad=12)
-    ax.set_xlabel(xlabel)
-    ax.set_ylabel(ylabel)
-
-    if ylim is not None:
-        ax.set_ylim(*ylim)
-
-    ax.grid(axis="y", linestyle="--", alpha=0.3)
-    ax.spines["top"].set_visible(False)
-    ax.spines["right"].set_visible(False)
-
-
-def add_bar_labels(ax, fmt="{:.0f}"):
-    for container in ax.containers:
-        labels = []
-        for bar in container:
-            value = bar.get_height()
-            labels.append(fmt.format(value))
-        ax.bar_label(container, labels=labels, padding=3, fontsize=9)
-
-
 def plot_class_distribution(class_distribution_df: pd.DataFrame):
     plot_df = class_distribution_df.sort_values("image_count", ascending=False).copy()
 
-    fig, ax = plt.subplots(figsize=(8, 5), constrained_layout=True)
-    ax.bar(plot_df["label"], plot_df["image_count"], width=0.6)
+    fig, ax = create_figure(figsize=(8, 5))
+    ax.bar(plot_df["label"], plot_df["image_count"], width=0.62)
 
-    style_axis(
+    format_axis(
         ax,
         title="Dataset Class Distribution",
+        subtitle="Number of selected galaxy images per morphology class",
         xlabel="Galaxy Morphology Class",
-        ylabel="Number of Images",
+        ylabel="Images",
+        integer_y=True,
     )
-    add_bar_labels(ax, fmt="{:.0f}")
+    annotate_bars(ax, fmt="{:.0f}")
 
-    fig.savefig(CLASS_DISTRIBUTION_FIGURE, dpi=180, bbox_inches="tight")
-    plt.close(fig)
+    save_figure(fig, CLASS_DISTRIBUTION_FIGURE)
 
 
 def plot_accuracy_overview(training_summary_df: pd.DataFrame, evaluation_summary_df: pd.DataFrame):
     train_row = training_summary_df.iloc[0]
     eval_row = evaluation_summary_df.iloc[0]
 
-    labels = ["Train Accuracy", "Validation Accuracy", "Test Accuracy"]
-    values = [
-        float(train_row["final_train_accuracy"]),
-        float(train_row["final_val_accuracy"]),
-        float(eval_row["overall_accuracy"]),
-    ]
+    plot_df = pd.DataFrame(
+        {
+            "metric": ["Train Accuracy", "Validation Accuracy", "Test Accuracy"],
+            "value": [
+                float(train_row["final_train_accuracy"]),
+                float(train_row["final_val_accuracy"]),
+                float(eval_row["overall_accuracy"]),
+            ],
+        }
+    )
 
-    fig, ax = plt.subplots(figsize=(8, 5), constrained_layout=True)
-    ax.bar(labels, values, width=0.6)
+    fig, ax = create_figure(figsize=(8, 5))
+    ax.bar(plot_df["metric"], plot_df["value"], width=0.62)
 
-    style_axis(
+    format_axis(
         ax,
         title="Model Accuracy Overview",
+        subtitle="Comparison between training, validation, and test performance",
         ylabel="Accuracy",
-        ylim=(0, 1.05),
     )
-    add_bar_labels(ax, fmt="{:.3f}")
+    ax.set_ylim(0, 1.05)
+    annotate_bars(ax, fmt="{:.3f}")
 
-    fig.savefig(ACCURACY_OVERVIEW_FIGURE, dpi=180, bbox_inches="tight")
-    plt.close(fig)
+    save_figure(fig, ACCURACY_OVERVIEW_FIGURE)
 
 
 def plot_per_class_support(classification_report_df: pd.DataFrame):
-    plot_df = classification_report_df.sort_values("support", ascending=False).copy()
+    plot_df = classification_report_df.sort_values("support", ascending=True).copy()
 
-    fig, ax = plt.subplots(figsize=(8, 5), constrained_layout=True)
-    ax.bar(plot_df["label"], plot_df["support"], width=0.6)
+    fig, ax = create_figure(figsize=(8, 5))
+    ax.barh(plot_df["label"], plot_df["support"], height=0.65)
 
-    style_axis(
+    format_axis(
         ax,
         title="Test Support by Class",
-        xlabel="Galaxy Morphology Class",
-        ylabel="Number of Test Samples",
+        subtitle="Number of test samples available for each galaxy class",
+        xlabel="Support",
+        ylabel="Class",
+        integer_y=True,
     )
-    add_bar_labels(ax, fmt="{:.0f}")
+    annotate_barh(ax, fmt="{:.0f}")
 
-    fig.savefig(PER_CLASS_SUPPORT_FIGURE, dpi=180, bbox_inches="tight")
-    plt.close(fig)
+    save_figure(fig, PER_CLASS_SUPPORT_FIGURE)
 
 
 def plot_avg_confidence_by_class(gradcam_report_df):
@@ -155,20 +139,20 @@ def plot_avg_confidence_by_class(gradcam_report_df):
         .sort_values("avg_confidence", ascending=False)
     )
 
-    fig, ax = plt.subplots(figsize=(8, 5), constrained_layout=True)
-    ax.bar(plot_df["predicted_label"], plot_df["avg_confidence"], width=0.6)
+    fig, ax = create_figure(figsize=(8, 5))
+    ax.bar(plot_df["predicted_label"], plot_df["avg_confidence"], width=0.62)
 
-    style_axis(
+    format_axis(
         ax,
         title="Average Prediction Confidence by Class",
+        subtitle="Confidence score averaged across Grad-CAM processed predictions",
         xlabel="Predicted Class",
         ylabel="Average Confidence",
-        ylim=(0, 1.05),
     )
-    add_bar_labels(ax, fmt="{:.3f}")
+    ax.set_ylim(0, 1.05)
+    annotate_bars(ax, fmt="{:.3f}")
 
-    fig.savefig(AVG_CONFIDENCE_FIGURE, dpi=180, bbox_inches="tight")
-    plt.close(fig)
+    save_figure(fig, AVG_CONFIDENCE_FIGURE)
 
 
 def create_final_portfolio_metrics(
