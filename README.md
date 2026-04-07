@@ -1,41 +1,105 @@
-# Galaxy Morphology Classification
+[final_portfolio_metrics.csv](https://github.com/user-attachments/files/26540823/final_portfolio_metrics.csv)# Galaxy Morphology Classification
 
-An end-to-end computer vision project focused on classifying galaxy images into morphology classes using deep learning, analytics-driven evaluation, and portfolio-ready reporting.
+An end-to-end computer vision project focused on classifying galaxy images into morphology classes using deep learning, model interpretability, and analytics-ready reporting.
 
 ## Overview
 
-This project explores how deep learning can be applied to astronomical image classification in a lightweight and presentation-focused way.
-
-The main objective is to classify galaxy images into morphology categories such as:
+This project applies transfer learning to classify galaxy images into three morphology categories:
 
 - spiral
 - elliptical
 - irregular
 
-The project was designed as a portfolio case study to demonstrate practical skills in computer vision, deep learning, model evaluation, data storytelling, and reporting.
+The project was designed as a portfolio case study to demonstrate practical skills in:
 
-## Business and Portfolio Context
+- computer vision
+- deep learning
+- model evaluation
+- interpretable AI
+- analytics-driven reporting
+- portfolio presentation for data analyst and data scientist roles
 
-Although this is a scientific image classification problem, the project was intentionally structured to support positioning for data analyst and data scientist roles.
+---
+
+## Project Objective
+
+The main goal of this project is to build a lightweight and portfolio-ready galaxy classification pipeline that produces:
+
+- a trained image classification model
+- evaluation metrics and visual reports
+- Grad-CAM interpretability examples
+- CSV outputs ready for analytical reporting tools
+- strong visual assets for GitHub and LinkedIn presentation
+
+---
+
+## Key Results
+
+[Uploading ftotal_images,num_classes,train_samples,validation_samples,test_samples,final_train_accuracy,final_validation_accuracy,test_accuracy,average_precision,average_recall,average_f1_score,inference_average_confidence,sample_image_accuracy,gradcam_examples
+2700,3,1890,405,405,0.7873,0.7704,0.3333,0.1111,0.3333,0.1667,0.977,0.3333,6
+inal_portfolio_metrics.csv…]()
+
+
+- `outputs/reports/final_portfolio_metrics.csv`
+- `outputs/reports/training_summary.csv`
+- `outputs/reports/evaluation_summary.csv`
+
+### Final Metrics
+
+- **Total images used:** `XX`
+- **Number of classes:** `XX`
+- **Train samples:** `XX`
+- **Validation samples:** `XX`
+- **Test samples:** `XX`
+- **Final train accuracy:** `XX.XX`
+- **Final validation accuracy:** `XX.XX`
+- **Test accuracy:** `XX.XX`
+- **Average precision:** `XX.XX`
+- **Average recall:** `XX.XX`
+- **Average F1-score:** `XX.XX`
+
+---
+
+## Project Visuals
+
+### Dataset Class Distribution
+![Dataset Class Distribution](outputs/figures/portfolio_class_distribution.png)
+
+### Model Accuracy Overview
+![Model Accuracy Overview](outputs/figures/portfolio_accuracy_overview.png)
+
+### Training Accuracy Curve
+![Training Accuracy Curve](outputs/figures/training_accuracy_curve.png)
+
+### Confusion Matrix
+![Confusion Matrix](outputs/figures/confusion_matrix.png)
+
+### Per-Class Evaluation Metrics
+![Per-Class Evaluation Metrics](outputs/figures/per_class_metrics.png)
+
+### Grad-CAM Example — Original Image
+![Grad-CAM Original](outputs/figures/gradcam_01_example_original.png)
+
+### Grad-CAM Example — Model Attention
+![Grad-CAM Heatmap](outputs/figures/gradcam_01_example_gradcam.png)
+
+> Replace the two Grad-CAM filenames above with the exact filenames generated in your `outputs/figures/` folder.
+
+---
+
+## Why This Project Matters
+
+Although this is an astronomy-based image classification problem, the project was intentionally structured to support positioning for analytics and machine learning roles.
 
 It demonstrates the ability to:
 
 - work with unstructured image data
-- build and evaluate machine learning pipelines
-- communicate model results clearly
-- create analytics-ready outputs for reporting tools such as Power BI
-- present technical work in a business-friendly format
+- build reproducible machine learning pipelines
+- train and evaluate deep learning models
+- generate business-friendly analytical outputs
+- connect technical results to visual storytelling and reporting
 
-## Project Goals
-
-The main goals of this project are:
-
-- build a lightweight galaxy image classification pipeline
-- classify galaxy images into three morphology classes
-- use transfer learning to improve performance with a smaller dataset
-- generate visual outputs for portfolio presentation
-- create analytics-ready reports and CSV outputs
-- prepare results for GitHub, LinkedIn, and Power BI communication
+---
 
 ## Tech Stack
 
@@ -49,7 +113,51 @@ The main goals of this project are:
 - OpenCV
 - Streamlit
 - Plotly
-- Power BI
+- Power BI-ready CSV outputs
+
+---
+
+## Dataset Strategy
+
+This project uses a lightweight execution strategy to avoid excessive local storage usage while still producing strong portfolio outputs.
+
+The approach includes:
+
+- a curated subset of galaxy images
+- three morphology classes
+- compact train / validation / test manifests
+- transfer learning with MobileNetV2
+- minimal duplication of image files
+- export of compact metrics and report tables
+
+---
+
+## Project Pipeline
+
+The project follows this execution flow:
+
+1. **Label Mapping**  
+   Convert original Galaxy Zoo label structures into three portfolio-friendly classes.
+
+2. **Data Preparation**  
+   Build train, validation, and test manifests and prepare sample images.
+
+3. **Model Training**  
+   Train a lightweight transfer learning classifier using MobileNetV2.
+
+4. **Evaluation**  
+   Generate classification metrics, confusion matrix, and test predictions.
+
+5. **Inference**  
+   Run batch and single-image predictions.
+
+6. **Grad-CAM**  
+   Create visual explanations showing where the model focuses.
+
+7. **Reporting**  
+   Consolidate final metrics and figures for portfolio presentation.
+
+---
 
 ## Project Structure
 
@@ -63,13 +171,14 @@ galaxy-morphology-classification/
 ├── notebooks/
 │   └── project_walkthrough.md
 ├── src/
+│   ├── label_mapping.py
 │   ├── data_preparation.py
 │   ├── training.py
 │   ├── evaluation.py
 │   ├── inference.py
 │   ├── gradcam.py
 │   ├── reporting.py
-│   └── run_pipeline.py
+│   └── chart_style.py
 ├── models/
 ├── outputs/
 │   ├── figures/
@@ -83,127 +192,90 @@ galaxy-morphology-classification/
 └── .gitignore
 ```
 
-## Methodology
+---
 
-The project is structured in six main stages:
-
-1. **Data Preparation**  
-   Organize, filter, and prepare a lightweight galaxy image dataset for training, validation, and testing.
-
-2. **Model Training**  
-   Use transfer learning with a pre-trained convolutional neural network to classify galaxy morphology.
-
-3. **Model Evaluation**  
-   Measure performance using classification metrics, confusion matrix, and per-class analysis.
-
-4. **Interpretability**  
-   Generate visual explanations such as Grad-CAM to understand model attention.
-
-5. **Reporting**  
-   Export figures, metrics, and CSV summaries for portfolio presentation and Power BI analysis.
-
-6. **Application Layer**  
-   Prepare an optional Streamlit app for image upload and live prediction.
-
-## Dataset Strategy
-
-This project follows a lightweight execution strategy to avoid excessive local storage usage while still producing strong portfolio results.
-
-The planned approach includes:
-
-- a reduced and curated subset of galaxy images
-- three clearly defined morphology classes
-- image resizing to a standard format
-- train / validation / test split
-- minimal duplication of image files
-- export of compact metrics and report tables
-
-## Planned Outputs
-
-The project is expected to generate:
-
-### Figures
-- class distribution chart
-- sample image grid by class
-- training accuracy curve
-- training loss curve
-- confusion matrix
-- precision and recall by class
-- Grad-CAM examples
+## Main Outputs
 
 ### Reports
 - classification report
-- model summary metrics
-- per-class evaluation table
-- training history summary
+- evaluation summary
+- inference summary
+- Grad-CAM summary
+- final portfolio metrics
+
+### Figures
+- class distribution
+- training curves
+- confusion matrix
+- per-class metrics
+- Grad-CAM examples
+- portfolio summary figures
 
 ### Predictions
-- example predictions
-- correct vs incorrect classifications
-- probability outputs for selected samples
+- test predictions
+- inference results
 
 ### Power BI Assets
-- CSV tables for dashboard creation
-- model metrics summary
-- prediction analysis tables
-- screenshot-ready dashboard outputs
+- CSV files prepared for reporting and dashboard creation
 
-## Planned Scripts
+---
 
-### `src/data_preparation.py`
-Prepare metadata, split the dataset, and organize image references for training and evaluation.
+## How to Run
 
-### `src/training.py`
-Train the galaxy classification model using transfer learning.
+Create the virtual environment and install dependencies:
 
-### `src/evaluation.py`
-Evaluate model performance and generate metrics, reports, and charts.
+```bash
+py -3.12 -m venv .venv
+.\.venv\Scripts\python -m pip install --upgrade pip
+.\.venv\Scripts\python -m pip install -r requirements.txt
+```
 
-### `src/inference.py`
-Run predictions on sample images and export prediction outputs.
+Run the full pipeline in this order:
 
-### `src/gradcam.py`
-Generate Grad-CAM visual explanations for selected galaxy images.
+```bash
+.\.venv\Scripts\python src\label_mapping.py
+.\.venv\Scripts\python src\data_preparation.py
+.\.venv\Scripts\python src\training.py
+.\.venv\Scripts\python src\evaluation.py
+.\.venv\Scripts\python src\inference.py
+.\.venv\Scripts\python src\gradcam.py
+.\.venv\Scripts\python src\reporting.py
+```
 
-### `src/reporting.py`
-Consolidate outputs into presentation-ready figures and report tables.
-
-### `src/run_pipeline.py`
-Run the full project pipeline in sequence.
-
-## Current Status
-
-**In progress**
-
-The repository structure and project planning phase are complete. The next steps are dataset preparation, training pipeline setup, evaluation outputs, and final portfolio presentation.
+---
 
 ## Portfolio Positioning
 
-This project was designed to support positioning for roles such as:
+This project was built to support positioning for roles such as:
 
 - Data Analyst
 - Data Scientist
 - Machine Learning Analyst
 - Computer Vision Analyst
-- Analytics professional with AI and reporting skills
+- AI-focused Analytics roles
 
 It is especially valuable as a portfolio case because it combines:
 
-- computer vision
-- deep learning
-- scientific data interpretation
-- reporting and visualization
-- and business-friendly presentation
+- image classification
+- transfer learning
+- evaluation and model reporting
+- interpretability
+- analytics-ready outputs
+- clean GitHub presentation
 
-## Next Steps
+---
 
-- prepare the lightweight dataset structure
-- create the first data preparation script
-- build the training pipeline
-- generate model evaluation outputs
-- create Power BI-ready reporting files
-- add visual assets to the README
-- prepare LinkedIn and resume materials
+## Future Improvements
+
+Possible future improvements include:
+
+- richer Streamlit interface for live predictions
+- stronger dashboard layer in Power BI
+- more advanced hyperparameter tuning
+- expanded interpretability examples
+- support for additional morphology classes
+
+---
 
 ## Author
 
@@ -212,6 +284,4 @@ Mechanical Engineer | Data Analytics | Machine Learning
 
 - LinkedIn: [linkedin.com/in/petersonvital](https://linkedin.com/in/petersonvital)
 
----
-
-This project is part of my portfolio to showcase applied computer vision, deep learning, analytics-driven reporting, and machine learning for real-world classification problems.
+This project is part of my portfolio to showcase applied computer vision, deep learning, interpretable AI, and analytics-ready reporting for real-world classification problems.
