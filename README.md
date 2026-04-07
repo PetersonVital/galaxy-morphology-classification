@@ -252,6 +252,8 @@ Possible future improvements include:
 - expanded interpretability examples
 - support for additional morphology classes
 
+#### PS: The model achieved baseline-level accuracy (~0.33), indicating limited learning under lightweight training constraints. This reflects the trade-off between computational efficiency and model performance in portfolio-oriented pipelines.
+
 ---
 
 ## Author
