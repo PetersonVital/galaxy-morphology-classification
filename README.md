@@ -1,4 +1,4 @@
-[final_portfolio_metrics.csv](https://github.com/user-attachments/files/26540823/final_portfolio_metrics.csv)# Galaxy Morphology Classification
+# Galaxy Morphology Classification
 
 An end-to-end computer vision project focused on classifying galaxy images into morphology classes using deep learning, model interpretability, and analytics-ready reporting.
 
@@ -19,7 +19,6 @@ The project was designed as a portfolio case study to demonstrate practical skil
 - analytics-driven reporting
 - portfolio presentation for data analyst and data scientist roles
 
----
 
 ## Project Objective
 
@@ -31,59 +30,46 @@ The main goal of this project is to build a lightweight and portfolio-ready gala
 - CSV outputs ready for analytical reporting tools
 - strong visual assets for GitHub and LinkedIn presentation
 
----
-
-## Key Results
-
-[Uploading ftotal_images,num_classes,train_samples,validation_samples,test_samples,final_train_accuracy,final_validation_accuracy,test_accuracy,average_precision,average_recall,average_f1_score,inference_average_confidence,sample_image_accuracy,gradcam_examples
-2700,3,1890,405,405,0.7873,0.7704,0.3333,0.1111,0.3333,0.1667,0.977,0.3333,6
-inal_portfolio_metrics.csv…]()
-
-
-- `outputs/reports/final_portfolio_metrics.csv`
-- `outputs/reports/training_summary.csv`
-- `outputs/reports/evaluation_summary.csv`
 
 ### Final Metrics
 
-- **Total images used:** `XX`
-- **Number of classes:** `XX`
-- **Train samples:** `XX`
-- **Validation samples:** `XX`
-- **Test samples:** `XX`
-- **Final train accuracy:** `XX.XX`
-- **Final validation accuracy:** `XX.XX`
-- **Test accuracy:** `XX.XX`
-- **Average precision:** `XX.XX`
-- **Average recall:** `XX.XX`
-- **Average F1-score:** `XX.XX`
+- **Total images used:** `2700`
+- **Number of classes:** `3`
+- **Train samples:** `1890`
+- **Validation samples:** `405`
+- **Test samples:** `405`
+- **Final train accuracy:** `0.79`
+- **Final validation accuracy:** `0.77`
+- **Test accuracy:** `0.33`
+- **Average precision:** `0.11`
+- **Average recall:** `0.33`
+- **Average F1-score:** `0.17`
 
----
+
 
 ## Project Visuals
 
 ### Dataset Class Distribution
-![Dataset Class Distribution](outputs/figures/portfolio_class_distribution.png)
+<img width="1460" height="920" alt="portfolio_class_distribution" src="https://github.com/user-attachments/assets/6e69fba0-f4ff-4b2a-aa5e-da80322a32ad" />
 
 ### Model Accuracy Overview
-![Model Accuracy Overview](outputs/figures/portfolio_accuracy_overview.png)
+<img width="1460" height="920" alt="portfolio_accuracy_overview" src="https://github.com/user-attachments/assets/087999e6-be26-40c8-a241-88e8214752c1" />
 
 ### Training Accuracy Curve
-![Training Accuracy Curve](outputs/figures/training_accuracy_curve.png)
+<img width="1820" height="1100" alt="training_accuracy_curve" src="https://github.com/user-attachments/assets/9810b03a-2983-4d7d-b0b0-1097f3bfb26b" />
 
 ### Confusion Matrix
-![Confusion Matrix](outputs/figures/confusion_matrix.png)
+<img width="1459" height="1100" alt="confusion_matrix" src="https://github.com/user-attachments/assets/d37de93b-23eb-4176-ab17-9b4867d3f2fb" />
 
 ### Per-Class Evaluation Metrics
 ![Per-Class Evaluation Metrics](outputs/figures/per_class_metrics.png)
+<img width="1820" height="1100" alt="per_class_metrics" src="https://github.com/user-attachments/assets/7eb3b3c8-bc2f-4c17-898d-d289c42c6c0d" />
 
 ### Grad-CAM Example — Original Image
-![Grad-CAM Original](outputs/figures/gradcam_01_example_original.png)
+<img width="424" height="424" alt="gradcam_01_spiral_original" src="https://github.com/user-attachments/assets/b35f0d4a-00d2-4490-b20e-6132ca235e0f" />
 
 ### Grad-CAM Example — Model Attention
-![Grad-CAM Heatmap](outputs/figures/gradcam_01_example_gradcam.png)
-
-> Replace the two Grad-CAM filenames above with the exact filenames generated in your `outputs/figures/` folder.
+<img width="424" height="424" alt="gradcam_01_spiral_gradcam" src="https://github.com/user-attachments/assets/5c6f33b9-fa51-47d2-a304-80908d5c52d0" />
 
 ---
 
