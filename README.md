@@ -61,9 +61,6 @@ The main goal of this project is to build a lightweight and portfolio-ready gala
 ### Confusion Matrix
 <img width="1459" height="1100" alt="confusion_matrix" src="https://github.com/user-attachments/assets/d37de93b-23eb-4176-ab17-9b4867d3f2fb" />
 
-### Per-Class Evaluation Metrics
-<img width="1820" height="1100" alt="per_class_metrics" src="https://github.com/user-attachments/assets/7eb3b3c8-bc2f-4c17-898d-d289c42c6c0d" />
-
 ### Grad-CAM Example — Original Image
 <img width="424" height="424" alt="gradcam_01_spiral_original" src="https://github.com/user-attachments/assets/b35f0d4a-00d2-4490-b20e-6132ca235e0f" />
 
