@@ -62,7 +62,6 @@ The main goal of this project is to build a lightweight and portfolio-ready gala
 <img width="1459" height="1100" alt="confusion_matrix" src="https://github.com/user-attachments/assets/d37de93b-23eb-4176-ab17-9b4867d3f2fb" />
 
 ### Per-Class Evaluation Metrics
-![Per-Class Evaluation Metrics](outputs/figures/per_class_metrics.png)
 <img width="1820" height="1100" alt="per_class_metrics" src="https://github.com/user-attachments/assets/7eb3b3c8-bc2f-4c17-898d-d289c42c6c0d" />
 
 ### Grad-CAM Example — Original Image
@@ -71,7 +70,7 @@ The main goal of this project is to build a lightweight and portfolio-ready gala
 ### Grad-CAM Example — Model Attention
 <img width="424" height="424" alt="gradcam_01_spiral_gradcam" src="https://github.com/user-attachments/assets/5c6f33b9-fa51-47d2-a304-80908d5c52d0" />
 
----
+
 
 ## Why This Project Matters
 
@@ -85,7 +84,6 @@ It demonstrates the ability to:
 - generate business-friendly analytical outputs
 - connect technical results to visual storytelling and reporting
 
----
 
 ## Tech Stack
 
@@ -101,7 +99,6 @@ It demonstrates the ability to:
 - Plotly
 - Power BI-ready CSV outputs
 
----
 
 ## Dataset Strategy
 
@@ -116,7 +113,6 @@ The approach includes:
 - minimal duplication of image files
 - export of compact metrics and report tables
 
----
 
 ## Project Pipeline
 
@@ -143,7 +139,6 @@ The project follows this execution flow:
 7. **Reporting**  
    Consolidate final metrics and figures for portfolio presentation.
 
----
 
 ## Project Structure
 
@@ -204,7 +199,6 @@ galaxy-morphology-classification/
 ### Power BI Assets
 - CSV files prepared for reporting and dashboard creation
 
----
 
 ## How to Run
 
